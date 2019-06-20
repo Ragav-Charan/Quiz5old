@@ -1,0 +1,36 @@
+<html>
+  <head>
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+          var dataset = {{ p|tojson }}
+        var data = google.visualization.arrayToDataTable(dataset);
+
+        var options = {
+          chart: {
+            title: 'Fare vs Survived Count',
+            subtitle: 'Fare,Survived and Not Survived',
+          },
+            bars: 'horizontal'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+  <body>
+  <center>
+      <h1>1001626250</h1>
+    <h1>Venkatesan, Charan</h1>
+    <h1>Quiz 5 old</h1>
+    <p>Points : {{ p }}</p>
+      <p>Bar Chart</p>
+    <div id="barchart_material" style="width: 900px; height: 500px;"></div>
+  </center>
+
+  </body>
+</html>

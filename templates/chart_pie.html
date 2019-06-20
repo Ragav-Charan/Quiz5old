@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script>
+        google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawScatterChart);
+      google.charts.load('current', {'packages':['bar']});
+      google.charts.setOnLoadCallback(drawChart);
+      function drawScatterChart() {
+          var dataset = {{ p|tojson }}
+        var data = google.visualization.arrayToDataTable(dataset);
+
+        var options = {
+          title: 'Mag vs. Query Count comparison',
+          hAxis: {title: 'Mag', minValue: 0},
+          vAxis: {title: 'Query Count', minValue: 0},
+          legend: 'none'
+        };
+
+        var chart = new google.visualization.ScatterChart(document.getElementById('chart_div'));
+
+        chart.draw(data, options);
+      }
+      function drawChart() {
+          var dataset = {{ p|tojson }}
+        var data = google.visualization.arrayToDataTable(dataset);
+
+        var options = {
+          chart: {
+            title: 'Fare vs Survived Count',
+            subtitle: 'Fare,Survived and Not Survived',
+          },
+            bars: 'horizontal'
+        };
+
+        var chart = new google.charts.Bar(document.getElementById('barchart_material'));
+
+        chart.draw(data, google.charts.Bar.convertOptions(options));
+      }
+    </script>
+    <style>
+    .scat{
+        float:left
+    }
+        .pic{
+            float:right
+        }
+        .bar{
+            clear:both
+        }
+    </style>
+</head>
+<body>
+<center>
+    <h1>1001626250</h1>
+    <h1>Venkatesan, Charan</h1>
+    <h1>Quiz 5 old</h1>
+    <p>Points : {{ p }}</p>
+      <p>Scatter Chart</p>
+<div class = "scat">
+    <div id="chart_div" style="width: 900px; height: 500px;"></div>
+</div>
+    <div class = "pic">
+    <img src="{{url_for('static',filename='hm.jpg')}}">
+    </div>
+    <br>
+    <br>
+    <div class = "bar">
+        <hr>
+    <p> Bar Chart</p>
+<div id="barchart_material" style="width: 900px; height: 500px;"></div>
+    </div>
+
+</center>
+
+</body>
+</html>
